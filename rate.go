@@ -31,6 +31,8 @@ for {
 */
 
 // 主要分析NewLimiter|Wait实现  其他次要
+// Wait 令牌不够时等待
+// Allow 令牌不够时放过 可用于丢弃请求
 
 // Inf is the infinite rate limit; it allows all events (even if burst is zero).
 // 最大数值(+∞)，令牌桶设置的每秒补充令牌数配置是Inf视为不限流
