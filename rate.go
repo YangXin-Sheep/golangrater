@@ -33,7 +33,7 @@ for {
 // 主要分析NewLimiter|Wait实现  其他次要
 
 // Inf is the infinite rate limit; it allows all events (even if burst is zero).
-// 最大数值(+∞)，令牌桶设置的每秒令牌数是Inf视为不限流
+// 最大数值(+∞)，令牌桶设置的每秒补充令牌数配置是Inf视为不限流
 const Inf = Limit(math.MaxFloat64)
 
 // Every converts a minimum time interval between events to a Limit.
