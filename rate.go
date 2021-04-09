@@ -33,7 +33,7 @@ for {
 // 主要分析NewLimiter|Wait实现  其他次要
 
 // Inf is the infinite rate limit; it allows all events (even if burst is zero).
-// 最大令牌桶令牌数值(+∞)，桶内设置的令牌数是Inf视为不限流
+// 最大数值(+∞)，令牌桶设置的每秒令牌数是Inf视为不限流
 const Inf = Limit(math.MaxFloat64)
 
 // Every converts a minimum time interval between events to a Limit.
@@ -46,9 +46,9 @@ func Every(interval time.Duration) Limit {
 
 type Limiter struct {
 	mu     sync.Mutex
-	limit  Limit // 限流数，如果是10 那么每秒恢复10个，如果是Inf每秒恢复无穷个视为不限流
-	burst  int   // 最大爆桶数，如果是10，那么同时获取第11个的时候爆桶
-	tokens float64
+	limit  Limit   // 限流数，如果是10 那么每秒恢复10个，如果是Inf每秒恢复无穷个视为不限流
+	burst  int     // 最大爆桶数，如果是10，那么同时获取第11个的时候爆桶
+	tokens float64 //桶内当前令牌数
 	// last is the last time the limiter's tokens field was updated
 	last time.Time
 	// lastEvent is the latest time of a rate-limited event (past or future)
